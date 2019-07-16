@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">The Pharmacist</string>
+    <string name="selamat_datang">Selamat Datang.</string>
+    <string name="silahkan_login_terlebih_dahulu">Silahkan login terlebih dahulu.</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="masuk">Masuk</string>
+    <string name="daftar_akun_baru">Daftar Akun Baru</string>
+    <string name="nomor_telefon">Nomor Telefon</string>
+    <string name="domisili">Domisili</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="daftar">Daftar</string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="sudah_punya_akun">Sudah punya akun?</string>
+    <string name="konfirmasi_password">Konfirmasi Password</string>
+    <string name="consulting">Konsultasi</string>
+    <string name="discover">Discover</string>
+    <string name="profile">Profil</string>
+    <string name="no_izin_praktek">No Izin Praktek</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dashboard">Dashboard</string>
+</resources>

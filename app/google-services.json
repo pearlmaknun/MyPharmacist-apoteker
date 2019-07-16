@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "211059939533",
+    "firebase_url": "https://mypharmacist-127fa.firebaseio.com",
+    "project_id": "mypharmacist-127fa",
+    "storage_bucket": "mypharmacist-127fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211059939533:android:8c33995ed196d15d",
+        "android_client_info": {
+          "package_name": "io.pearlmaknun.mypharmacist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211059939533-rkt82sq3nmkp10qmkt75ike7ndmbcmgg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.pearlmaknun.mypharmacist",
+            "certificate_hash": "144b949859365584f367d9699ec41c12381c6884"
+          }
+        },
+        {
+          "client_id": "211059939533-09pd140lonknf0pth961jbseaoolul4f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxF9V9OaXuTS85laljPcjIsIs0Keq0E8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211059939533-09pd140lonknf0pth961jbseaoolul4f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211059939533:android:511ff28646750bea",
+        "android_client_info": {
+          "package_name": "io.pearlmaknun.mypharmacist_apoteker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211059939533-nhnv7ofktp5an3j6ptun5q9dkh7okm5h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.pearlmaknun.mypharmacist_apoteker",
+            "certificate_hash": "144b949859365584f367d9699ec41c12381c6884"
+          }
+        },
+        {
+          "client_id": "211059939533-09pd140lonknf0pth961jbseaoolul4f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxF9V9OaXuTS85laljPcjIsIs0Keq0E8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211059939533-09pd140lonknf0pth961jbseaoolul4f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
