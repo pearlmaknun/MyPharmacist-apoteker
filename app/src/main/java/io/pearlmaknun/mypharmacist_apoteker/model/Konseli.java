@@ -3,7 +3,9 @@ package io.pearlmaknun.mypharmacist_apoteker.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Konseli {
+import java.io.Serializable;
+
+public class Konseli implements Serializable {
 
     @SerializedName("user_id")
     @Expose

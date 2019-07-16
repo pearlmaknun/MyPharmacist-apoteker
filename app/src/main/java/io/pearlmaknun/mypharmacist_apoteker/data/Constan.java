@@ -18,5 +18,12 @@ public class Constan {
 
     // konsultasi
     public static final String CHECK = BASE_URL_USER + "/statuscon";
-    public static final String ACCEPT_REQUEST = BASE_URL_USER + "/profile";
+    public static final String RESPOND_REQUEST = BASE_URL_USER + "/statuschat";
+
+    // status konsultasi
+    public static final String DIPROSES = "0";
+    public static final String BERLANGSUNG = "1";
+    public static final String DITOLAK = "2";
+    public static final String EXPIRED = "3";
+    public static final String ENDED = "4";
 }

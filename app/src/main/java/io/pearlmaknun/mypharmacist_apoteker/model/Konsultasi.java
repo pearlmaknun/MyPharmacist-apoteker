@@ -3,7 +3,9 @@ package io.pearlmaknun.mypharmacist_apoteker.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Check {
+import java.io.Serializable;
+
+public class Konsultasi implements Serializable {
 
     @SerializedName("chat_id")
     @Expose

@@ -30,52 +30,54 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/layout_lanjutkan"
-        android:layout_margin="@dimen/tepi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/tepi"
+        android:layout_marginTop="@dimen/tepi"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/tepi">
+            android:layout_margin="@dimen/tepi"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Kosultasi Berjalan:"
-                android:textSize="@dimen/h3"
+                android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textAlignment="center"/>
+                android:textSize="@dimen/h3" />
 
             <TextView
                 android:id="@+id/user_nama_lanjutkan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nama"
                 android:padding="@dimen/cardtepi"
+                android:text="Nama"
                 android:textAlignment="center"
-                android:textSize="@dimen/h2"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textSize="@dimen/h2" />
 
             <Button
                 android:id="@+id/lanjutkan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lanjutkan"
                 android:background="@drawable/all_button"
                 android:padding="@dimen/tepi"
-                android:textColor="@color/putih"/>
+                android:text="Lanjutkan"
+                android:textColor="@color/putih" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/layout_request"
-        android:layout_marginHorizontal="@dimen/tepi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/tepi"
-        >
+        android:layout_marginHorizontal="@dimen/tepi"
+        android:layout_marginTop="@dimen/tepi"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,8 +90,8 @@
                 android:layout_height="wrap_content"
                 android:text="Permintaan Konsultasi"
                 android:textAlignment="center"
-                android:textSize="@dimen/h3"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textSize="@dimen/h3" />
 
             <TextView
                 android:id="@+id/nama_user"
@@ -97,54 +99,56 @@
                 android:layout_height="wrap_content"
                 android:text="Nama"
                 android:textAlignment="center"
-                android:textSize="@dimen/h2"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textSize="@dimen/h2" />
 
             <RelativeLayout
-                android:layout_margin="@dimen/tepi"
+                android:paddingTop="@dimen/tepi"
+                android:padding="@dimen/cardtepi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/tolak"
-                    android:layout_width="140dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="Tolak"
                     android:background="@drawable/all_button"
-                    android:textColor="@color/putih"/>
+                    android:text="Tolak"
+                    android:textColor="@color/putih" />
 
                 <Button
                     android:id="@+id/terima"
-                    android:layout_width="140dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="Terima"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/all_button"
-                    android:textColor="@color/putih"/>
+                    android:text="Terima"
+                    android:textColor="@color/putih" />
 
             </RelativeLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_marginHorizontal="@dimen/tepi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/tepi"
+        android:layout_marginTop="@dimen/tepi">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/cardtepi">
+            android:layout_margin="@dimen/cardtepi"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/tepi"
                 android:text="Pencapaian"
                 android:textAlignment="center"
-                android:textSize="@dimen/h3"
                 android:textColor="@color/black"
-                android:padding="@dimen/tepi"/>
+                android:textSize="@dimen/h3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -155,17 +159,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/consulting"
-                    android:textSize="@dimen/h3"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/h3" />
 
                 <TextView
                     android:id="@+id/total"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="12"
-                    android:textSize="@dimen/h3"
                     android:textAlignment="viewEnd"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/h3" />
 
             </LinearLayout>
 
@@ -177,8 +181,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rating"
-                    android:textSize="@dimen/h3"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/h3" />
 
                 <androidx.appcompat.widget.AppCompatRatingBar
                     android:id="@+id/rating"
@@ -187,8 +191,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:numStars="5"
-                    />
+                    android:numStars="5" />
 
             </RelativeLayout>
 

@@ -3,7 +3,7 @@ package io.pearlmaknun.mypharmacist_apoteker.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CheckActivityResponse {
+public class KonsultasiResponse {
 
     @SerializedName("status")
     @Expose
@@ -11,12 +11,9 @@ public class CheckActivityResponse {
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("data")
+    @SerializedName("konsultasi")
     @Expose
-    private Konsultasi data;
-    @SerializedName("user")
-    @Expose
-    private Konseli user;
+    private Konsultasi konsultasi;
 
     public Boolean getStatus() {
         return status;
@@ -34,19 +31,11 @@ public class CheckActivityResponse {
         this.message = message;
     }
 
-    public Konsultasi getData() {
-        return data;
+    public Konsultasi getKonsultasi() {
+        return konsultasi;
     }
 
-    public void setData(Konsultasi data) {
-        this.data = data;
-    }
-
-    public Konseli getUser() {
-        return user;
-    }
-
-    public void setUser(Konseli user) {
-        this.user = user;
+    public void setKonsultasi(Konsultasi konsultasi) {
+        this.konsultasi = konsultasi;
     }
 }
