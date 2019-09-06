@@ -5,15 +5,15 @@ public class Chat {
     String id_chat;
     String id_konsultasi;
     String pesan;
-    String user_id;
-    String apoteker_id;
+    String pengirim;
+    String penerima;
 
-    public Chat(String id_chat, String id_konsultasi, String pesan, String user_id, String apoteker_id) {
+    public Chat(String id_chat, String id_konsultasi, String pesan, String pengirim, String penerima) {
         this.id_chat = id_chat;
         this.id_konsultasi = id_konsultasi;
         this.pesan = pesan;
-        this.user_id = user_id;
-        this.apoteker_id = apoteker_id;
+        this.pengirim = pengirim;
+        this.penerima = penerima;
     }
 
     public Chat() {
@@ -43,19 +43,19 @@ public class Chat {
         this.pesan = pesan;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getPengirim() {
+        return pengirim;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setPengirim(String pengirim) {
+        this.pengirim = pengirim;
     }
 
-    public String getApoteker_id() {
-        return apoteker_id;
+    public String getPenerima() {
+        return penerima;
     }
 
-    public void setApoteker_id(String apoteker_id) {
-        this.apoteker_id = apoteker_id;
+    public void setPenerima(String penerima) {
+        this.penerima = penerima;
     }
 }

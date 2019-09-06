@@ -18,7 +18,7 @@ public class Session {
 
     int PRIVATE_MODE = 0;
 
-    private static final String PREF_NAME = "my-pharmacist";
+    private static final String PREF_NAME = "my-pharmacist-apoteker";
 
     private static final String IS_LOGIN = "IsLoged";
     private static final String IS_FIRST = "IsFisrt";

@@ -95,11 +95,12 @@ public class DashboardFragment extends Fragment {
                             Log.e("RESPONSE SUCCESS", "" + new Gson().toJson(response1));
                             DialogUtils.closeDialog();
                             if (response1.getStatus()) {
-                                layout(response1.getData().getStatusChat(), response1);
+                                Log.e("status layout", response1.getStatus().toString());
+                                showLayout(response1.getData().getStatusChat(), response1);
                                 konseli = response1.getUser();
                                 konsultasi = response1.getData();
                             } else {
-                                layout("-1", response1);
+                                showLayout("-1", response1);
                                 Log.e("RESPONSE SUCCESS", "" + new Gson().toJson(response1));
                             }
                         }
@@ -136,7 +137,7 @@ public class DashboardFragment extends Fragment {
                                     sendMessageFirstTime(konsultasi.getUserId(), konsultasi.getApotekerId(), konsultasi.getChatId());
                                 } else {
                                     Toast.makeText(getContext(), response1.getMessage(), Toast.LENGTH_LONG).show();
-                                    layout("-1", null);
+                                    showLayout("-1", null);
                                 }
                             } else {
                                 Toast.makeText(getContext(), response1.getMessage(), Toast.LENGTH_LONG).show();
@@ -158,8 +159,8 @@ public class DashboardFragment extends Fragment {
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("id_konsultasi", konsultasiId);
-        hashMap.put("user_id", user);
-        hashMap.put("apoteker_id", apoteker);
+        hashMap.put("penerima", user);
+        hashMap.put("pengirim", apoteker);
         String pesan = "Selamat siang, ";
         pesan = pesan + konseli.getUserName() + ". ";
         pesan = pesan + "Perkenalkan saya " + session.getUser().getApotekerName() + " yang akan mendampingi proses konsultasi anda dalam 30 menit ke dapan. ";
@@ -167,10 +168,12 @@ public class DashboardFragment extends Fragment {
         hashMap.put("pesan", pesan);
 
         reference.child("Chats").push().setValue(hashMap);
-        startActivity(new Intent(getContext(), ConsultationActivity.class));
+        Intent intent = new Intent(getContext(), ConsultationActivity.class);
+        intent.putExtra("konsultasi", konsultasi);
+        startActivity(intent);
     }
 
-    private void layout(String status, CheckActivityResponse response){
+    private void showLayout(String status, CheckActivityResponse response){
         switch (status){
             case DIPROSES:
                 layoutLanjutkan.setVisibility(View.GONE);

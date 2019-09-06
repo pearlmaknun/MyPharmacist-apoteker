@@ -59,8 +59,6 @@ public class ConsultationActivity extends AppCompatActivity {
 
     Konsultasi konsultasi;
 
-    Intent intent;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,8 +125,8 @@ public class ConsultationActivity extends AppCompatActivity {
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("id_konsultasi", konsultasi.getChatId());
-        hashMap.put("user_id", konsultasi.getUserId());
-        hashMap.put("apoteker_id", konsultasi.getApotekerId());
+        hashMap.put("penerima", konsultasi.getUserId());
+        hashMap.put("pengirim", konsultasi.getApotekerId());
         hashMap.put("pesan", pesan);
 
         reference.child("Chats").push().setValue(hashMap);

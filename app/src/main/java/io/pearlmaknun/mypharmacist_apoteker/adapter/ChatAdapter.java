@@ -10,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -56,11 +54,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         Chat chat = chats.get(position);
         holder.showMessage.setText(chat.getPesan());
 
-        if (imgUrl.equals("default")) {
+        /*if (imgUrl.equals("default")) {
             holder.imgProfile.setImageResource(R.drawable.profile);
         } else {
             Glide.with(context).load(imgUrl).into(holder.imgProfile);
-        }
+        }*/
     }
 
     @Override
@@ -84,7 +82,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
         session = new Session(context);
-        if (chats.get(position).getApoteker_id().equals(session.getUser().getApotekerId())){
+        if (chats.get(position).getPengirim().equals(session.getUser().getApotekerId())){
             return MSG_TYPE_RIGHT;
         } else {
             return MSG_TYPE_LEFT;

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">The Pharmacist</string>
+    <string name="app_name">My Pharmacist - Pharmacist</string>
     <string name="selamat_datang">Selamat Datang.</string>
     <string name="silahkan_login_terlebih_dahulu">Silahkan login terlebih dahulu.</string>
     <string name="email">Email</string>
