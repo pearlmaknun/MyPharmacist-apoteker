@@ -7,13 +7,15 @@ public class Chat {
     String pesan;
     String pengirim;
     String penerima;
+    Boolean isseen;
 
-    public Chat(String id_chat, String id_konsultasi, String pesan, String pengirim, String penerima) {
+    public Chat(String id_chat, String id_konsultasi, String pesan, String pengirim, String penerima, Boolean isseen) {
         this.id_chat = id_chat;
         this.id_konsultasi = id_konsultasi;
         this.pesan = pesan;
         this.pengirim = pengirim;
         this.penerima = penerima;
+        this.isseen = isseen;
     }
 
     public Chat() {
@@ -57,5 +59,13 @@ public class Chat {
 
     public void setPenerima(String penerima) {
         this.penerima = penerima;
+    }
+
+    public Boolean getIsseen() {
+        return isseen;
+    }
+
+    public void setIsseen(Boolean isseen) {
+        this.isseen = isseen;
     }
 }

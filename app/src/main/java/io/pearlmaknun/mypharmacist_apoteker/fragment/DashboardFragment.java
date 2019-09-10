@@ -21,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import butterknife.BindView;
@@ -33,6 +35,7 @@ import io.pearlmaknun.mypharmacist_apoteker.model.CheckActivityResponse;
 import io.pearlmaknun.mypharmacist_apoteker.model.Konseli;
 import io.pearlmaknun.mypharmacist_apoteker.model.Konsultasi;
 import io.pearlmaknun.mypharmacist_apoteker.model.KonsultasiResponse;
+import io.pearlmaknun.mypharmacist_apoteker.util.CommonUtil;
 import io.pearlmaknun.mypharmacist_apoteker.util.DialogUtils;
 
 import static io.pearlmaknun.mypharmacist_apoteker.data.Constan.BERLANGSUNG;
@@ -61,6 +64,8 @@ public class DashboardFragment extends Fragment {
     Konseli konseli;
 
     Konsultasi konsultasi;
+
+    long diff = 0;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -99,6 +104,30 @@ public class DashboardFragment extends Fragment {
                                 showLayout(response1.getData().getStatusChat(), response1);
                                 konseli = response1.getUser();
                                 konsultasi = response1.getData();
+                                String currentTime = CommonUtil.getCurrentDate();
+                                Log.d("current_time", currentTime);
+                                String startDate = konsultasi.getStartChat();
+                                Log.d("start_con", "" + startDate);
+
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                                try {
+                                    Date d2 = format.parse(currentTime);
+                                    Date d1 = format.parse(startDate);
+
+                                    diff = d2.getTime() - d1.getTime();
+                                    Log.d("diff", "" + diff);
+
+                                    long timeLimit = Long.valueOf(konsultasi.getChatDuration()) * 60 * 1000;
+                                    diff = timeLimit - diff;
+                                    Log.d("cerecall time", konsultasi.getChatDuration());
+
+                                    if (diff < timeLimit) {
+                                        Log.d("CLICKED CHAT", "" + diff);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             } else {
                                 showLayout("-1", response1);
                                 Log.e("RESPONSE SUCCESS", "" + new Gson().toJson(response1));
@@ -109,6 +138,7 @@ public class DashboardFragment extends Fragment {
                     @Override
                     public void onError(ANError anError) {
                         DialogUtils.closeDialog();
+                        Toast.makeText(getContext(), "Tidak ada koneksi", Toast.LENGTH_LONG).show();
                         Log.e("RESPONSE GAGAL", "" + new Gson().toJson(anError.getErrorBody() + anError.getMessage()));
                     }
 
@@ -166,6 +196,7 @@ public class DashboardFragment extends Fragment {
         pesan = pesan + "Perkenalkan saya " + session.getUser().getApotekerName() + " yang akan mendampingi proses konsultasi anda dalam 30 menit ke dapan. ";
         pesan = pesan + "Ada yang bisa saya bantu?";
         hashMap.put("pesan", pesan);
+        hashMap.put("isseen", false);
 
         reference.child("Chats").push().setValue(hashMap);
         Intent intent = new Intent(getContext(), ConsultationActivity.class);
@@ -198,6 +229,7 @@ public class DashboardFragment extends Fragment {
             case R.id.lanjutkan:
                 Intent intent = new Intent(getContext(), ConsultationActivity.class);
                 intent.putExtra("konsultasi", konsultasi);
+                intent.putExtra("diff", diff);
                 startActivity(intent);
                 break;
             case R.id.tolak:
