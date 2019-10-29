@@ -167,14 +167,14 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    @OnClick({R.id.login, R.id.daftar})
+    @OnClick({R.id.login, R.id.aktivasi})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login:
                 checkValidasi();
                 break;
-            case R.id.daftar:
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            case R.id.aktivasi:
+                Intent intent = new Intent(LoginActivity.this, AktivasiActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();

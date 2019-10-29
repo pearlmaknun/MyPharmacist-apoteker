@@ -5,6 +5,7 @@ public class RegisterResponse {
     private Boolean status;
     private String message;
     private String id;
+    private String username;
 
     public String getId() {
         return id;
@@ -28,5 +29,13 @@ public class RegisterResponse {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

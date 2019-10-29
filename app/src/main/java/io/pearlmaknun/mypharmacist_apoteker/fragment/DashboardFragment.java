@@ -35,6 +35,7 @@ import io.pearlmaknun.mypharmacist_apoteker.model.CheckActivityResponse;
 import io.pearlmaknun.mypharmacist_apoteker.model.Konseli;
 import io.pearlmaknun.mypharmacist_apoteker.model.Konsultasi;
 import io.pearlmaknun.mypharmacist_apoteker.model.KonsultasiResponse;
+import io.pearlmaknun.mypharmacist_apoteker.model.Resume;
 import io.pearlmaknun.mypharmacist_apoteker.util.CommonUtil;
 import io.pearlmaknun.mypharmacist_apoteker.util.DialogUtils;
 
@@ -43,6 +44,7 @@ import static io.pearlmaknun.mypharmacist_apoteker.data.Constan.CHECK;
 import static io.pearlmaknun.mypharmacist_apoteker.data.Constan.DIPROSES;
 import static io.pearlmaknun.mypharmacist_apoteker.data.Constan.DITOLAK;
 import static io.pearlmaknun.mypharmacist_apoteker.data.Constan.RESPOND_REQUEST;
+import static io.pearlmaknun.mypharmacist_apoteker.data.Constan.RESUME;
 
 public class DashboardFragment extends Fragment {
 
@@ -65,6 +67,8 @@ public class DashboardFragment extends Fragment {
 
     Konsultasi konsultasi;
 
+    int konsultasi_total = 0;
+    float konsulrating = 0;
     long diff = 0;
 
     public DashboardFragment() {
@@ -81,6 +85,7 @@ public class DashboardFragment extends Fragment {
         session = new Session(getContext());
 
         check();
+        getResume();
 
         return view;
     }
@@ -239,5 +244,34 @@ public class DashboardFragment extends Fragment {
                 respond(BERLANGSUNG);
                 break;
         }
+    }
+
+    private void getResume() {
+        AndroidNetworking.get(RESUME)
+                .addHeaders("Content-Type", "application/json")
+                .addHeaders("Authorization", "Bearer " + session.getToken())
+                .addHeaders("device_id", session.getDeviceId())
+                .build()
+                .getAsObject(Resume.class, new ParsedRequestListener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        if (response instanceof Resume) {
+                            if (((Resume) response).getStatus()) {
+                                konsultasi_total = (((Resume) response).getTotalweek());
+                                total.setText(""+konsultasi_total);
+                                if (((Resume) response).getAverageRating() != null){
+                                    konsulrating = (((Resume) response).getAverageRating());
+                                    rating.setRating(konsulrating);
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.d("anError", anError.getErrorBody() + " AND " + anError.getErrorDetail());
+                    }
+                });
+
     }
 }
