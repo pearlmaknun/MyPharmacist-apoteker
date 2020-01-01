@@ -167,18 +167,22 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    @OnClick({R.id.login, R.id.aktivasi})
+    @OnClick({R.id.login, R.id.btn_daftar/*R.id.aktivasi*/})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login:
                 checkValidasi();
                 break;
-            case R.id.aktivasi:
+            case R.id.btn_daftar:
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                break;
+            /*case R.id.aktivasi:
                 Intent intent = new Intent(LoginActivity.this, AktivasiActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
-                break;
+                break;*/
         }
     }
 }

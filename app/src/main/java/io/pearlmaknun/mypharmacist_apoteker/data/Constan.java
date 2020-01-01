@@ -21,6 +21,7 @@ public class Constan {
     // konsultasi
     public static final String CHECK = BASE_URL_USER + "/statuscon";
     public static final String RESPOND_REQUEST = BASE_URL_USER + "/statuschat";
+    public static final String CHECK_HAS_APPOINMENT = BASE_URL_USER + "/janji/";
 
     // status konsultasi
     public static final String DIPROSES = "0";

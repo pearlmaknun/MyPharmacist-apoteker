@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private void requestLocationUpdates() {
         LocationRequest request = new LocationRequest();
         //Specify how often your app should request the device’s location
-        request.setInterval(30000);
+        request.setInterval(5000);
         //Get the most accurate location data available//
         request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(this);

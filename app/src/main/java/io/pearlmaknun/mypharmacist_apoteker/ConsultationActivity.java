@@ -53,8 +53,8 @@ public class ConsultationActivity extends AppCompatActivity {
     RecyclerView recyclerview;
     @BindView(R.id.txt_message)
     EditText txtMessage;
-    @BindView(R.id.txt_countdown)
-    TextView txtCountdown;
+//    @BindView(R.id.txt_countdown)
+//    TextView txtCountdown;
 
     FirebaseUser firebaseUser;
     DatabaseReference reference;
@@ -130,7 +130,7 @@ public class ConsultationActivity extends AppCompatActivity {
         });
 
         seenMessage(konsultasiId);
-        countDown();
+        //countDown();
     }
 
     private void seenMessage(final String konsultasiId){
@@ -168,7 +168,7 @@ public class ConsultationActivity extends AppCompatActivity {
         reference.child("Chats").push().setValue(hashMap);
     }
 
-    @OnClick({R.id.btn_back, R.id.btn_send})
+    @OnClick({R.id.btn_back, R.id.btn_send, R.id.teruskan})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
@@ -183,28 +183,33 @@ public class ConsultationActivity extends AppCompatActivity {
                 }
                 txtMessage.setText("");
                 break;
+            case R.id.teruskan:
+                Intent i = new Intent(ConsultationActivity.this, MainPertemuanActivity.class);
+                i.putExtra("konsultasi", konsultasi);
+                startActivity(i);
+                break;
         }
     }
 
-    public void countDown() {
-
-        Log.e("duration on c", duration.toString());
-
-        new CountDownTimer(duration, 1000) {
-
-            @SuppressLint({"DefaultLocale", "SetTextI18n"})
-            public void onTick(long millisUntilFinished) {
-                txtCountdown.setText("" + String.format("%d : %d",
-                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
-                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
-                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-
-        }.start();
-    }
+//    public void countDown() {
+//
+//        Log.e("duration on c", duration.toString());
+//
+//        new CountDownTimer(duration, 1000) {
+//
+//            @SuppressLint({"DefaultLocale", "SetTextI18n"})
+//            public void onTick(long millisUntilFinished) {
+//                txtCountdown.setText("" + String.format("%d : %d",
+//                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+//                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+//                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//
+//            }
+//
+//        }.start();
+//    }
 }
