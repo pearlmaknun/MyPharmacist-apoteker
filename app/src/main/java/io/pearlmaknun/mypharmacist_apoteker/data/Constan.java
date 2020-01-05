@@ -21,7 +21,7 @@ public class Constan {
     // konsultasi
     public static final String CHECK = BASE_URL_USER + "/statuscon";
     public static final String RESPOND_REQUEST = BASE_URL_USER + "/statuschat";
-    public static final String CHECK_HAS_APPOINMENT = BASE_URL_USER + "/janji/";
+    public static final String APPOINMENT = BASE_URL_USER + "/janji";
 
     // status konsultasi
     public static final String DIPROSES = "0";
@@ -29,4 +29,6 @@ public class Constan {
     public static final String DITOLAK = "2";
     public static final String EXPIRED = "3";
     public static final String ENDED = "4";
+
+    public static final String MASTER_APOTEK = BASE_URL + "/masterapotek";
 }

@@ -20,14 +20,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.pearlmaknun.mypharmacist_apoteker.data.Session;
-import io.pearlmaknun.mypharmacist_apoteker.model.CheckActivityResponse;
-import io.pearlmaknun.mypharmacist_apoteker.model.Konseli;
 import io.pearlmaknun.mypharmacist_apoteker.model.Konsultasi;
 import io.pearlmaknun.mypharmacist_apoteker.model.Pertemuan;
 import io.pearlmaknun.mypharmacist_apoteker.model.PertemuanResponse;
 import io.pearlmaknun.mypharmacist_apoteker.util.DialogUtils;
 
-import static io.pearlmaknun.mypharmacist_apoteker.data.Constan.CHECK_HAS_APPOINMENT;
+import static io.pearlmaknun.mypharmacist_apoteker.data.Constan.APPOINMENT;
 
 public class MainPertemuanActivity extends AppCompatActivity {
 
@@ -64,7 +62,7 @@ public class MainPertemuanActivity extends AppCompatActivity {
 
     private void check() {
         DialogUtils.openDialog(this);
-        AndroidNetworking.get(CHECK_HAS_APPOINMENT + konsultasi.getChatId())
+        AndroidNetworking.get(APPOINMENT + "/" + konsultasi.getChatId())
                 .addHeaders("Content-Type", "application/json")
                 .addHeaders("device_id", session.getDeviceId())
                 .addHeaders("Authorization", "Bearer " + session.getToken())
@@ -79,10 +77,15 @@ public class MainPertemuanActivity extends AppCompatActivity {
                             if (response1.getStatus()) {
                                 pertemuan = response1.getData();
                                 card.setVisibility(View.VISIBLE);
-                                apotekerName.setText(pertemuan.getApotekerName());
-                                konseliName.setText(pertemuan.getUserName());
+                                tambah.setVisibility(View.GONE);
+                                apotekerName.setText("Apoteker: "+pertemuan.getApotekerName());
+                                konseliName.setText("Konseli: "+pertemuan.getUserName());
                                 detail.setText(pertemuan.getPertemuanDetail());
-                                status.setText(pertemuan.getPertemuanStatus());
+                                if(pertemuan.getPertemuanStatus().equals("0")){
+                                    status.setText("Status: Di Proses ke Konseli");
+                                } else if(pertemuan.getPertemuanStatus().equals("1")){
+                                    status.setText("Status: Disetujui kedua belah pihak");
+                                }
                             } else {
                                 card.setVisibility(View.GONE);
                                 Toast.makeText(MainPertemuanActivity.this, response1.getMessage(), Toast.LENGTH_LONG).show();

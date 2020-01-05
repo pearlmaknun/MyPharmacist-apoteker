@@ -25,6 +25,9 @@ public class Pertemuan implements Serializable {
     @SerializedName("pertemuan_alamat")
     @Expose
     private String pertemuanAlamat;
+    @SerializedName("pertemuan_lokasi")
+    @Expose
+    private String pertemuanLokasi;
     @SerializedName("pertemuan_detail")
     @Expose
     private String pertemuanDetail;
@@ -84,6 +87,14 @@ public class Pertemuan implements Serializable {
 
     public void setPertemuanAlamat(String pertemuanAlamat) {
         this.pertemuanAlamat = pertemuanAlamat;
+    }
+
+    public String getPertemuanLokasi() {
+        return pertemuanLokasi;
+    }
+
+    public void setPertemuanLokasi(String pertemuanLokasi) {
+        this.pertemuanLokasi = pertemuanLokasi;
     }
 
     public String getPertemuanDetail() {

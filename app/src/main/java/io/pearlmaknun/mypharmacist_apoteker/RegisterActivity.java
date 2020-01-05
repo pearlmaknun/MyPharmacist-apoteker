@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.ANRequest;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.ParsedRequestListener;
 import com.google.android.gms.maps.model.LatLng;
@@ -24,13 +27,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.pearlmaknun.mypharmacist_apoteker.data.Session;
 import io.pearlmaknun.mypharmacist_apoteker.helper.GpsTrackers;
+import io.pearlmaknun.mypharmacist_apoteker.model.Apotek;
 import io.pearlmaknun.mypharmacist_apoteker.model.LoginResponse;
 import io.pearlmaknun.mypharmacist_apoteker.model.RegisterResponse;
 import io.pearlmaknun.mypharmacist_apoteker.util.CommonUtil;
@@ -47,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextInputEditText email;
     @BindView(R.id.phone)
     TextInputEditText phone;
-    @BindView(R.id.domisili)
+    @BindView(R.id.alamat)
     TextInputEditText domisili;
     @BindView(R.id.password)
     TextInputEditText password;
@@ -55,6 +63,18 @@ public class RegisterActivity extends AppCompatActivity {
     TextInputEditText conPassword;
     @BindView(R.id.izinpraktek)
     TextInputEditText izinpraktek;
+    @BindView(R.id.nosipa1)
+    TextInputEditText textSipa1;
+    @BindView(R.id.spinSipa1)
+    Spinner spinSipa1;
+    @BindView(R.id.nosipa2)
+    TextInputEditText textSipa2;
+    @BindView(R.id.spinSipa2)
+    Spinner spinSipa2;
+    @BindView(R.id.nosipa3)
+    TextInputEditText textSipa3;
+    @BindView(R.id.spinSipa3)
+    Spinner spinSipa3;
 
     FirebaseAuth auth;
     DatabaseReference reference;
@@ -63,6 +83,11 @@ public class RegisterActivity extends AppCompatActivity {
     private GpsTrackers gps;
 
     Session session;
+
+    List<Apotek> list = new ArrayList<>();
+
+    List<String> apotekName = new ArrayList<String>();
+    String[] apotekId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +101,18 @@ public class RegisterActivity extends AppCompatActivity {
 
         gps = new GpsTrackers(this);
         lastPosition = new LatLng(gps.getLatitude(), gps.getLongitude());
+
+        list = session.getPreferenceApotek();
+        if (list.size() > 0) {
+            apotekId = new String[list.size()];
+            for (int index = 0; index < list.size(); index++) {
+                apotekName.add(list.get(index).getApotikName());
+                apotekId[index] = list.get(index).getApotikId();
+            }
+        }
+        spinSipa1.setAdapter(new ArrayAdapter<>(Objects.requireNonNull(this), android.R.layout.simple_list_item_activated_1, apotekName));
+        spinSipa2.setAdapter(new ArrayAdapter<>(Objects.requireNonNull(this), android.R.layout.simple_list_item_activated_1, apotekName));
+        spinSipa3.setAdapter(new ArrayAdapter<>(Objects.requireNonNull(this), android.R.layout.simple_list_item_activated_1, apotekName));
     }
 
     private void checkValidasi() {
@@ -86,19 +123,21 @@ public class RegisterActivity extends AppCompatActivity {
         list.add(phone);
         list.add(domisili);
         list.add(password);
+        list.add(textSipa1);
         if (CommonUtil.validateEmptyEntries(list)) {
-            if (password.getText().toString().equals(conPassword.getText().toString())) {
-                register();
-            } else {
-                Toast.makeText(RegisterActivity.this, "Konfirmasi Password tidak sesuai.", Toast.LENGTH_LONG).show();
-            }
+                if (password.getText().toString().equals(conPassword.getText().toString())) {
+                    register();
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Konfirmasi Password tidak sesuai.", Toast.LENGTH_LONG).show();
+                }
         }
     }
 
     private void register() {
         Log.e("password", password.getText().toString());
         DialogUtils.openDialog(this);
-        AndroidNetworking.post(REGISTER)
+        ANRequest.PostRequestBuilder postRequestBuilder = new ANRequest.PostRequestBuilder(REGISTER);
+        postRequestBuilder
                 .addHeaders("Content-Type", "application/json")
                 .addBodyParameter("username", username.getText().toString())
                 .addBodyParameter("email", email.getText().toString())
@@ -106,7 +145,19 @@ public class RegisterActivity extends AppCompatActivity {
                 .addBodyParameter("address", domisili.getText().toString())
                 .addBodyParameter("password", password.getText().toString())
                 .addBodyParameter("nik", izinpraktek.getText().toString())
-                .build()
+                .addBodyParameter("nosipa1", textSipa1.getText().toString())
+                .addBodyParameter("sipa1", apotekId[spinSipa1.getSelectedItemPosition()]);
+
+        if(textSipa2.getText().toString().length() != 0){
+            postRequestBuilder.addBodyParameter("nosipa2", textSipa2.getText().toString())
+                    .addBodyParameter("sipa2", apotekId[spinSipa2.getSelectedItemPosition()]);
+        }
+        if(textSipa3.getText().toString().length() != 0){
+            postRequestBuilder.addBodyParameter("nosipa3", textSipa3.getText().toString())
+                    .addBodyParameter("sipa3", apotekId[spinSipa3.getSelectedItemPosition()]);
+        }
+
+        postRequestBuilder.build()
                 .getAsObject(RegisterResponse.class, new ParsedRequestListener() {
                     @Override
                     public void onResponse(Object response) {
@@ -199,7 +250,11 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        login();
+                                        //login();
+                                        Intent intent = new Intent(RegisterActivity.this, MessageActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                        finish();
                                     }
                                 }
                             });

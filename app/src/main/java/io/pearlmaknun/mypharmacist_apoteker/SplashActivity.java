@@ -30,7 +30,6 @@ public class SplashActivity extends AppCompatActivity {
         super.onStart();
 
         requestPermission();
-
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     }
 

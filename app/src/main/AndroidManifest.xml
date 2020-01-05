@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AppoinmentActivity"></activity>
+        <activity android:name=".MessageActivity"></activity>
+        <activity android:name=".AppoinmentActivity" />
         <activity android:name=".MainPertemuanActivity" />
         <activity android:name=".HistoryActivity" />
         <activity android:name=".AktivasiActivity" />

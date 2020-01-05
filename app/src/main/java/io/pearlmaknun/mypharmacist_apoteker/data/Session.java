@@ -6,7 +6,14 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import io.pearlmaknun.mypharmacist_apoteker.MainActivity;
+import io.pearlmaknun.mypharmacist_apoteker.model.Apotek;
 import io.pearlmaknun.mypharmacist_apoteker.model.Profile;
 
 public class Session {
@@ -26,6 +33,7 @@ public class Session {
     private static final String VERSION_APP = "VersionApp";
     private static final String TOKEN = "Token";
     public static final String KEY_USER = "user";
+    private static final String APOTEK = "Apotek";
 
     public Session(Context context) {
         this._context = context;
@@ -112,5 +120,26 @@ public class Session {
     public void setIsFisrt(Boolean v) {
         editor.putBoolean(IS_FIRST, v);
         editor.commit();
+    }
+
+    public void setPreferenceApotek(String preferenceApotek) {
+        editor.putString(APOTEK, preferenceApotek);
+        editor.apply();
+    }
+
+    public List<Apotek> getPreferenceApotek() {
+        Gson gson = new Gson();
+        String json = pref.getString(APOTEK, "");
+        JSONArray lists;
+        List<Apotek> list = new ArrayList<>();
+        try {
+            lists = new JSONArray(json);
+            for (int i = 0; i < lists.length(); i++){
+                list.add(new Apotek(lists.getJSONObject(i).getString("apotik_id"), lists.getJSONObject(i).getString("apotik_name")));
+            }
+        } catch (JSONException ignored) {
+
+        }
+        return list;
     }
 }

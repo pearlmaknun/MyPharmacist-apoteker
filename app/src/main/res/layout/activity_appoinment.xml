@@ -64,7 +64,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Detail (Tidak Wajib)"
+        android:hint="Keterangan"
         android:padding="8dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -74,6 +74,13 @@
             android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/lokasi_saat_ini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gunakan Lokasi Apoteker saat ini"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"

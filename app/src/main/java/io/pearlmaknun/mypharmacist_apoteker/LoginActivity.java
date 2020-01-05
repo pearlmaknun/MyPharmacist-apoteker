@@ -30,17 +30,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.pearlmaknun.mypharmacist_apoteker.data.Session;
 import io.pearlmaknun.mypharmacist_apoteker.helper.GpsTrackers;
+import io.pearlmaknun.mypharmacist_apoteker.model.Apotek;
+import io.pearlmaknun.mypharmacist_apoteker.model.ApotekResponse;
 import io.pearlmaknun.mypharmacist_apoteker.model.LoginResponse;
 import io.pearlmaknun.mypharmacist_apoteker.util.CommonUtil;
 import io.pearlmaknun.mypharmacist_apoteker.util.DialogUtils;
 
 import static io.pearlmaknun.mypharmacist_apoteker.data.Constan.LOGIN;
+import static io.pearlmaknun.mypharmacist_apoteker.data.Constan.MASTER_APOTEK;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -59,6 +63,8 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth auth;
     DatabaseReference reference;
 
+    List<Apotek> list;
+
     @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         session = new Session(this);
+        Log.e("get last loc", "TES AJA");
 
         gps = new GpsTrackers(this);
         lastPosition = new LatLng(gps.getLatitude(), gps.getLongitude());
@@ -98,6 +105,12 @@ public class LoginActivity extends AppCompatActivity {
             session.setVersionApp(versionName);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
+        }
+
+        List<Apotek> list = new ArrayList<>();
+        list = session.getPreferenceApotek();
+        if(list.size() == 0){
+            apotek();
         }
     }
 
@@ -184,5 +197,39 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
                 break;*/
         }
+    }
+
+    public void apotek(){
+        DialogUtils.openDialog(this);
+        AndroidNetworking.get(MASTER_APOTEK)
+                .addHeaders("Content-Type", "application/json")
+                .build()
+                .getAsObject(ApotekResponse.class, new ParsedRequestListener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        DialogUtils.closeDialog();
+                        if (response instanceof ApotekResponse) {
+                            ApotekResponse response1 = (ApotekResponse) response;
+                            Log.e("RESPONSE SUCCESS", "" + new Gson().toJson(response1));
+                            if (response1.getStatus()) {
+                                list = (((ApotekResponse) response).getData());
+                                System.out.println(list.toString());
+                                if (list.size() > 0) {
+                                    String json = new Gson().toJson(list);
+                                    session.setPreferenceApotek(json);
+                                }
+                            } else {
+                                Log.e("RESPONSE SUCCESS", "" + new Gson().toJson(response1));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        DialogUtils.closeDialog();
+                        Log.e("RESPONSE GAGAL", "" + new Gson().toJson(anError.getErrorBody() + anError.getMessage()));
+                    }
+
+                });
     }
 }

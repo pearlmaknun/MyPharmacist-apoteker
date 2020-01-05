@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         int permission = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION);
         //If the app currently has access to the location permission...//
-        if (permission == PackageManager.PERMISSION_GRANTED) {
+        if (permission == PackageManager.PERMISSION_GRANTED && session.isLoggedIn()) {
             //...then request location updates//
             client.requestLocationUpdates(request, new LocationCallback() {
                 @Override
