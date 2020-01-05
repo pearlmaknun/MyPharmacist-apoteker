@@ -29,6 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.pearlmaknun.mypharmacist_apoteker.ConsultationActivity;
+import io.pearlmaknun.mypharmacist_apoteker.HistoryActivity;
 import io.pearlmaknun.mypharmacist_apoteker.R;
 import io.pearlmaknun.mypharmacist_apoteker.data.Session;
 import io.pearlmaknun.mypharmacist_apoteker.model.CheckActivityResponse;
@@ -56,6 +57,8 @@ public class DashboardFragment extends Fragment {
     TextView total;
     @BindView(R.id.rating)
     AppCompatRatingBar rating;
+    @BindView(R.id.ratingangka)
+    TextView ratingAngka;
     @BindView(R.id.user_nama_lanjutkan)
     TextView userNamaLanjutkan;
     @BindView(R.id.layout_lanjutkan)
@@ -228,7 +231,7 @@ public class DashboardFragment extends Fragment {
         }
     }
 
-    @OnClick({R.id.lanjutkan, R.id.tolak, R.id.terima})
+    @OnClick({R.id.lanjutkan, R.id.tolak, R.id.terima, R.id.ic_history})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lanjutkan:
@@ -242,6 +245,10 @@ public class DashboardFragment extends Fragment {
                 break;
             case R.id.terima:
                 respond(BERLANGSUNG);
+                break;
+            case R.id.ic_history:
+                Intent i = new Intent(getContext(), HistoryActivity.class);
+                startActivity(i);
                 break;
         }
     }
@@ -262,6 +269,9 @@ public class DashboardFragment extends Fragment {
                                 if (((Resume) response).getAverageRating() != null){
                                     konsulrating = (((Resume) response).getAverageRating());
                                     rating.setRating(konsulrating);
+                                    double value = Double.valueOf(konsulrating);
+                                    double roundOff = (double) Math.round(value * 100) / 100;
+                                    ratingAngka.setText(roundOff + "");
                                 }
                             }
                         }

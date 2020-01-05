@@ -53,6 +53,8 @@ public class ConsultationActivity extends AppCompatActivity {
     RecyclerView recyclerview;
     @BindView(R.id.txt_message)
     EditText txtMessage;
+    @BindView(R.id.teruskan)
+    ImageView teruskan;
 //    @BindView(R.id.txt_countdown)
 //    TextView txtCountdown;
 
@@ -73,6 +75,7 @@ public class ConsultationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultation);
         ButterKnife.bind(this);
+        teruskan.setVisibility(View.GONE);
 
         konsultasi = (Konsultasi) getIntent().getSerializableExtra("konsultasi");
         duration = getIntent().getLongExtra("diff", 0);
